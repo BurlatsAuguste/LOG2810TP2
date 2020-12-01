@@ -7,16 +7,14 @@ class state{
 		private:
 			char let;
 			state* next;
-			size_t length;
 
 
 		public:
 			state(char letter, state* n = nullptr) :let(letter), next(n) {};
-			~state(){delete(next);};
+			~state(){delete next;};
 			state* getNext() { return next; };
 			char getLet() { return let; };
 			void setNext(state* n) { next = n; };
-			size_t getLength(){return length; };
 
 };
 
@@ -25,7 +23,8 @@ class Machine {
 private:
 
 	state* current;
-	state* start; //permet de supprimer tout les pointeurs des states de la machine
+	state* start;
+	size_t length;//permet de supprimer tous les pointeurs des states de la machine
 
 public:
 	Machine(std::string mot);

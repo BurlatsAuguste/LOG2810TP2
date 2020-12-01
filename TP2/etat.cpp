@@ -1,4 +1,5 @@
 #include <vector>
+#include <set>
 #include <string>
 #include <iostream>
 #include <queue>
@@ -44,9 +45,9 @@ etat *etat::trouverFils(char lettre)
     return enfants.at(lettre);
 }
 
-vector<string> etat::getToutFils(string debut)
+set<string> etat::getToutFils(string debut)
 {
-    vector<string> lexique;
+    set<string> lexique;
     queue<pair<string, etat*>> aExplorer;
     map<char, etat *>::iterator it;
     etat *etatCourant;
@@ -54,7 +55,7 @@ vector<string> etat::getToutFils(string debut)
 
     if(terminal)
     {
-        lexique.push_back(debut);
+        lexique.insert(debut);
     }
 
     for(it = enfants.begin(); it != enfants.end(); it++)
@@ -62,14 +63,12 @@ vector<string> etat::getToutFils(string debut)
         aExplorer.push({debut+it->first, it->second});
     }
 
-    cout << aExplorer.size() << endl;
-    cout << enfants.size() << endl;
     while (!aExplorer.empty())
     {
         etatCourant = aExplorer.front().second;
         chaineCourante = aExplorer.front().first;   
         if(etatCourant->terminal)
-            lexique.push_back(chaineCourante);
+            lexique.insert(chaineCourante);
         
         for(it = etatCourant->enfants.begin(); it != etatCourant->enfants.end(); it++)
         {
@@ -81,9 +80,9 @@ vector<string> etat::getToutFils(string debut)
     return lexique;
 }
 
-vector<string> etat::getLexique(string mot, int indice)
+set<string> etat::getLexique(string mot, int indice)
 {
-    vector<string> lexique;
+    set<string> lexique;
     if(int(mot.length())-1 == indice)
     {
         lexique = getToutFils(mot);
@@ -104,9 +103,11 @@ vector<string> etat::getLexique(string mot, int indice)
 
 string etat::choixAleatoire()
 {
-    vector<string> lexique = getLexique("", -1);
+    set<string> lexique = getLexique("", -1);
+    vector<string> lexiquecopy(lexique.size());
+    copy(lexique.begin(), lexique.end(), lexiquecopy.begin());
     random_device generator;
     uniform_int_distribution<int> tirage(0, lexique.size()-1);
-    return lexique[tirage(generator)];
+    return lexiquecopy[tirage(generator)];
 }
 

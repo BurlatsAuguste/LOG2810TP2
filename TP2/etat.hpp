@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <set>
 
 #ifndef DEF_etat
 #define DEF_etat
@@ -16,8 +17,8 @@ public:
     ~etat();
     void ajouterMot(std::string mot, int indice);
     etat *trouverFils(char lettre);
-    std::vector<std::string> getLexique(std::string debut, int indice);
-    std::vector<std::string> getToutFils(std::string debut);
+    std::set<std::string> getLexique(std::string debut, int indice);
+    std::set<std::string> getToutFils(std::string debut);
     std::string choixAleatoire();
 };
 
