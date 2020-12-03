@@ -15,7 +15,7 @@ private:
 public:
     etat(){terminal = false;};
     ~etat();
-    void ajouterMot(std::string mot, int indice);
+    void ajouterMot(std::string mot, int indice = -1);
     etat *trouverFils(char lettre);
     std::set<std::string> getLexique(std::string debut, int indice);
     std::set<std::string> getToutFils(std::string debut);
