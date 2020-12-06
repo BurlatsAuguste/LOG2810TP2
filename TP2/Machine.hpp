@@ -1,14 +1,15 @@
 #pragma once
 
-//#include "state.h"
 #include <string>
 
+
+//Classe pour entreposer un état du système
 class state{
 		private:
 			char let;
 			state* next;
 
-
+		//fonctions get/set standard
 		public:
 			state(char letter, state* n = nullptr) :let(letter), next(n) {};
 			~state(){delete next;};
