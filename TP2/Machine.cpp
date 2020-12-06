@@ -3,7 +3,7 @@
 
 using namespace std;
 
-
+//création de la machine de Mealy
 Machine::Machine(string mot)
 {
 	length = mot.length();
@@ -21,10 +21,10 @@ Machine::Machine(string mot)
 			prev->setNext(actual);
 			prev = actual;
 		}
-		//actual->setNext(start);
 	}
 }
 
+//Retour est 1/0 et la fonction passe au prochain état
 int Machine::next(char let)
 {
 	char let2 = current->getLet();
@@ -32,6 +32,8 @@ int Machine::next(char let)
 	return let == let2 ? 0:1;
 }
 
+//détermine le nombre d'erreurs dans un mot test
+//retourne -1 si les chaines ne sont pas de longueur egale
 int Machine::errors(string mot)
 {
 	if (mot.length() != length)
