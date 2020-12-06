@@ -7,7 +7,10 @@
 
 using namespace std;
 
-//cree un nouveau lexique a partir d'un fichier contenant les mots du lexique
+
+//initialise le lexique depuis le fichier dont le nom est passé en argument
+//retourne un pointeur vers l'état initial de l'automate
+
 etat *creerLexique(string filename)
 {
     ifstream file(filename);
@@ -31,9 +34,9 @@ etat *creerLexique(string filename)
     return automate;
 }
 
-
 //Fonction qui effectue la partie 2 du jeu soit les essais et le nombre d'erreurs
 //Retourne true si l'utilisateur gagne false sinon
+
 bool partie2(Machine* machines)
 {
     //15 essais au maximum
