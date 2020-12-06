@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include "etat.hpp"
 #include "Machine.hpp"
 
