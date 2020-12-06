@@ -8,10 +8,27 @@
 
 using namespace std;
 
+//retourne le nombre de ligne du fichier dont le nom est donné en argument
+int getNbLigne(string filename)
+{
+    ifstream file(filename);
+    if(!file)
+    {
+        //cout << "Impossible d'ouvrir le fichier en lecture" << endl;
+        exit(-1);
+    }
+    string ligne;
+    int nbLigne = 0;
+    while(getline(file, ligne))
+    {
+        nbLigne++;
+    }
+    file.close();
+    return nbLigne;
+}
 
 //initialise le lexique depuis le fichier dont le nom est passé en argument
 //retourne un pointeur vers l'état initial de l'automate
-
 etat *creerLexique(string filename)
 {
     ifstream file(filename);
@@ -24,13 +41,16 @@ etat *creerLexique(string filename)
     }
     etat *automate = new etat();
     string mot;
-    getline(file, mot);
+    file >> mot;
+    int count = 1;
+    int nombreLigne = getNbLigne(filename);
     
     //ajouter tous les mots au lexique
-    while(mot != "")
+    while(count <= nombreLigne)
     {
         automate->ajouterMot(mot, -1);
-        getline(file, mot);
+        file >> mot;
+        count++;
     } 
     return automate;
 }
