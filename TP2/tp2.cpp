@@ -7,6 +7,8 @@
 
 using namespace std;
 
+//initialise le lexique depuis le fichier dont le nom est passé en argument
+//retourne un pointeur vers l'état initial de l'automate
 etat *creerLexique(string filename)
 {
     ifstream file(filename);
@@ -27,17 +29,6 @@ etat *creerLexique(string filename)
     } 
     return automate;
 }
-
-void afficherLexique(etat *automate, string mot)
-{
-    set<string> lexique = automate->getLexique(mot, -1);
-    for(string s : lexique)
-        cout << s << endl;
-    
-}
-
-
-
 
 bool partie2(Machine* machines)
 {
