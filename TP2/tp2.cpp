@@ -7,13 +7,15 @@
 
 using namespace std;
 
+
 //initialise le lexique depuis le fichier dont le nom est passé en argument
 //retourne un pointeur vers l'état initial de l'automate
+
 etat *creerLexique(string filename)
 {
     ifstream file(filename);
 
-    //si le nom de fichier donné par l'utilisateur n'est pas bon, la fonction s'arrête et retourne NULL
+    //si le nom de fichier donné par l'utilisateur n'est pas bon, la fonction s'arrête et retourne nullptr
     if(!file)
     {
         cout << "Impossible d'ouvrir le fichier en lecture" << endl;
@@ -22,6 +24,8 @@ etat *creerLexique(string filename)
     etat *automate = new etat();
     string mot;
     getline(file, mot);
+    
+    //ajouter tous les mots au lexique
     while(mot != "")
     {
         automate->ajouterMot(mot, -1);
@@ -30,9 +34,12 @@ etat *creerLexique(string filename)
     return automate;
 }
 
+//Fonction qui effectue la partie 2 du jeu soit les essais et le nombre d'erreurs
+//Retourne true si l'utilisateur gagne false sinon
+
 bool partie2(Machine* machines)
 {
-    
+    //15 essais au maximum
     for (int i = 0; i < 15; i++)
     {
         string guess;
@@ -40,6 +47,7 @@ bool partie2(Machine* machines)
 
         int errors = machines->errors(guess);
 
+        //traitement selon le nombre d'erreurs
         if (errors == 0) {
             cout << "Bravo vous avez trouve le code secret !" << endl;
             return true;
@@ -55,8 +63,10 @@ bool partie2(Machine* machines)
     
 }
 
+//Lancement du choix automatique de mot
 void modeAuto(etat* racine) {
 
+    //trouver un mot aléatoire dans le lexique
     string randomWord = racine->choixAleatoire();
     Machine* machines = new Machine(randomWord);
 
