@@ -1,7 +1,7 @@
 all:tp2
 
 tp2: tp2.o etat.o Machine.o
-	g++ -Wall tp2.o etat.o -o tp2
+	g++ -Wall tp2.o etat.o Machine.o -o tp2
 
 etat.o: etat.cpp etat.hpp
 	g++ -Wall -c etat.cpp -o etat.o
